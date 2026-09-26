@@ -23,4 +23,9 @@ git clone --depth 1 "${REPO_URL}" "${TEMP_DIR}/repo" 2>/dev/null || {
 }
 
 # Run setup.sh from the cloned repo pointing to current directory
-bash "${TEMP_DIR}/repo/setup.sh" --dir "${PWD}" "$@"
+# Redirect input from /dev/tty to restore interactive keyboard input when piped from curl
+if [ -e /dev/tty ]; then
+  bash "${TEMP_DIR}/repo/setup.sh" --dir "${PWD}" "$@" < /dev/tty
+else
+  bash "${TEMP_DIR}/repo/setup.sh" --dir "${PWD}" "$@"
+fi

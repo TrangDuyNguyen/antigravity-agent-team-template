@@ -112,21 +112,28 @@ show_banner
 mkdir -p "${TARGET_DIR}"
 TARGET_DIR="$(cd "${TARGET_DIR}" && pwd)"
 
+# Ensure stdin is attached to terminal tty for interactive prompts when piped (e.g. curl ... | bash)
+if [ ! -t 0 ] && [ -e /dev/tty ]; then
+  exec < /dev/tty
+elif [ ! -t 0 ] && [ ! -e /dev/tty ]; then
+  AUTO_CONFIRM=true
+fi
+
 # Interactive Inputs if not provided
 if [[ -z "${PROJECT_NAME}" ]]; then
   DEFAULT_NAME="$(basename "${TARGET_DIR}")"
   echo -e "${BOLD}1. Project Identification:${RESET}"
-  read -r -p "   Project Name [${DEFAULT_NAME}]: " INPUT_NAME
+  read -r -p "   Project Name [${DEFAULT_NAME}]: " INPUT_NAME || true
   PROJECT_NAME="${INPUT_NAME:-$DEFAULT_NAME}"
 fi
 
 if [[ -z "${PROJECT_TYPE}" ]]; then
-  read -r -p "   Project Type (e.g. Mobile App, Web Fullstack, Backend Service) [Software Application]: " INPUT_TYPE
+  read -r -p "   Project Type (e.g. Mobile App, Web Fullstack, Backend Service) [Software Application]: " INPUT_TYPE || true
   PROJECT_TYPE="${INPUT_TYPE:-Software Application}"
 fi
 
 if [[ -z "${PROJECT_DESCRIPTION}" ]]; then
-  read -r -p "   Short Description [High-performance application powered by Antigravity Agent Team]: " INPUT_DESC
+  read -r -p "   Short Description [High-performance application powered by Antigravity Agent Team]: " INPUT_DESC || true
   PROJECT_DESCRIPTION="${INPUT_DESC:-High-performance application powered by Antigravity Agent Team}"
 fi
 
@@ -146,7 +153,7 @@ if [[ -z "${SELECTED_STACKS}" ]]; then
     echo -e "   ${CYAN}[$((i+1))]${RESET} ${AVAILABLE_STACK_LABELS[$i]}"
   done
   echo ""
-  read -r -p "   Select Stack(s) [1]: " STACK_CHOICE
+  read -r -p "   Select Stack(s) [1]: " STACK_CHOICE || true
   STACK_CHOICE="${STACK_CHOICE:-1}"
 
   IFS=',' read -ra CHOICES <<< "${STACK_CHOICE}"
@@ -176,7 +183,7 @@ fi
 
 # Confirmation
 if [ "$AUTO_CONFIRM" = false ]; then
-  read -r -p "Proceed with scaffolding? [Y/n]: " CONFIRM
+  read -r -p "Proceed with scaffolding? [Y/n]: " CONFIRM || true
   CONFIRM="${CONFIRM:-Y}"
   if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
     echo -e "${RED}Aborted by user.${RESET}"
