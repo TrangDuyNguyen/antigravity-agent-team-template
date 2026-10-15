@@ -3,7 +3,7 @@
 # ==============================================================================
 # Antigravity Multi-Agent Team & SOP Scaffolding CLI Engine
 # ==============================================================================
-# Description: Bootstraps the 8-Gate Multi Sub-Agent SOP & Ponytail mindset
+# Description: Bootstraps the 9-Gate Multi Sub-Agent SOP & Ponytail mindset
 # into any software project across multiple technology stacks.
 # ==============================================================================
 
@@ -41,7 +41,7 @@ show_banner() {
   echo " ██║  ██║██║ ╚████║   ██║   ██║╚██████╔╝██║  ██║██║  ██║ ╚████╔╝ ██║   ██║      ██║   "
   echo " ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝   ╚═╝      ╚═╝   "
   echo -e "${RESET}"
-  echo -e "${PURPLE}${BOLD}   ⚡ 8-Gate Multi Sub-Agent SOP & Ponytail Mindset Scaffolding Engine ⚡${RESET}"
+  echo -e "${PURPLE}${BOLD}   ⚡ 9-Gate Multi Sub-Agent SOP & Ponytail Mindset Scaffolding Engine ⚡${RESET}"
   echo -e "${DIM}   Cross-Platform: Flutter | React Native | iOS | Android | Web FE | Backend${RESET}\n"
 }
 
@@ -192,17 +192,18 @@ if [ "$AUTO_CONFIRM" = false ]; then
 fi
 
 # Step 1: Create Directories
-echo -e "\n${BLUE}==> [1/4] Preparing directories in target workspace...${RESET}"
+echo -e "\n${BLUE}==> [1/5] Preparing directories in target workspace...${RESET}"
 TARGET_AGENTS="${TARGET_DIR}/.agents"
 TARGET_SKILLS="${TARGET_AGENTS}/skills"
 TARGET_RULES="${TARGET_AGENTS}/rules"
+TARGET_SCRIPTS="${TARGET_DIR}/scripts"
 
 if [ "$DRY_RUN" = false ]; then
-  mkdir -p "${TARGET_SKILLS}" "${TARGET_RULES}"
+  mkdir -p "${TARGET_SKILLS}" "${TARGET_RULES}" "${TARGET_SCRIPTS}"
 fi
 
 # Step 2: Copy Core Agnostic Skills & Rules
-echo -e "${BLUE}==> [2/4] Injecting 8-Gate Agnostic Core Sub-Agents & Ponytail Rules...${RESET}"
+echo -e "${BLUE}==> [2/5] Injecting 9-Gate Agnostic Core Sub-Agents & Ponytail Rules...${RESET}"
 if [ "$DRY_RUN" = false ]; then
   # Copy rules
   cp -R "${TEMPLATE_DIR}/.agents/rules/"* "${TARGET_RULES}/"
@@ -215,10 +216,10 @@ if [ "$DRY_RUN" = false ]; then
   # Copy Core Skills
   cp -R "${TEMPLATE_DIR}/.agents/skills/_core/"* "${TARGET_SKILLS}/"
 fi
-echo -e "    ${GREEN}✔${RESET} Core skills installed: PO, Tech Lead, BA, UI/UX, PM, QA/QC, Reviewer, Ponytail suite."
+echo -e "    ${GREEN}✔${RESET} Core skills installed: PO, Tech Lead, BA, UI/UX, PM, QA/QC, Reviewer, Security Auditor, Ponytail suite."
 
 # Step 3: Copy Selected Stacks
-echo -e "${BLUE}==> [3/4] Installing specialized Dev Sub-Agents for: ${SELECTED_STACKS}...${RESET}"
+echo -e "${BLUE}==> [3/5] Installing specialized Dev Sub-Agents for: ${SELECTED_STACKS}...${RESET}"
 STACK_RULES_AGGREGATE=""
 ACTIVE_DEV_AGENTS=""
 
@@ -251,7 +252,7 @@ for stack in "${STACK_ARRAY[@]}"; do
 done
 
 # Step 4: Render AGENTS.md
-echo -e "${BLUE}==> [4/4] Synthesizing Project AGENTS.md...${RESET}"
+echo -e "${BLUE}==> [4/5] Synthesizing Project AGENTS.md...${RESET}"
 if [ "$DRY_RUN" = false ]; then
   TPL_FILE="${TEMPLATE_DIR}/AGENTS.md.tpl"
   TARGET_AGENTS_MD="${TARGET_DIR}/AGENTS.md"
@@ -283,6 +284,34 @@ with open(out_path, "w", encoding="utf-8") as f:
 fi
 echo -e "    ${GREEN}✔${RESET} Generated ${TARGET_DIR}/AGENTS.md"
 
+# Step 5: Inject Multi-Agent CLI Relay Pipeline & Makefile automation
+echo -e "${BLUE}==> [5/5] Injecting Multi-Agent CLI Relay Pipeline & Makefile automation...${RESET}"
+if [ "$DRY_RUN" = false ]; then
+  if [[ -d "${TEMPLATE_DIR}/scripts" ]]; then
+    cp -R "${TEMPLATE_DIR}/scripts/"* "${TARGET_SCRIPTS}/"
+    chmod +x "${TARGET_SCRIPTS}"/* 2>/dev/null || true
+    echo -e "    ${GREEN}✔${RESET} Installed CLI pipeline scripts to ${TARGET_SCRIPTS}"
+  fi
+
+  TARGET_MAKEFILE="${TARGET_DIR}/Makefile"
+  if [[ ! -f "${TARGET_MAKEFILE}" ]]; then
+    if [[ -f "${TEMPLATE_DIR}/Makefile.tpl" ]]; then
+      cp "${TEMPLATE_DIR}/Makefile.tpl" "${TARGET_MAKEFILE}"
+      echo -e "    ${GREEN}✔${RESET} Created ${TARGET_MAKEFILE}"
+    fi
+  else
+    if ! grep -q "gate_pipeline.sh" "${TARGET_MAKEFILE}"; then
+      echo -e "\n# =======================================================" >> "${TARGET_MAKEFILE}"
+      echo -e "# Antigravity Multi-Agent Workflow Automation" >> "${TARGET_MAKEFILE}"
+      echo -e "# =======================================================" >> "${TARGET_MAKEFILE}"
+      cat "${TEMPLATE_DIR}/Makefile.tpl" >> "${TARGET_MAKEFILE}"
+      echo -e "    ${GREEN}✔${RESET} Integrated pipeline targets into existing ${TARGET_MAKEFILE}"
+    else
+      echo -e "    ${YELLOW}ℹ${RESET} Pipeline targets already present in ${TARGET_MAKEFILE}"
+    fi
+  fi
+fi
+
 # Summary
 TOTAL_SKILLS=$(find "${TARGET_SKILLS}" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ' || echo "0")
 echo -e "\n${GREEN}${BOLD}========================================================================${RESET}"
@@ -291,8 +320,9 @@ echo -e "${GREEN}${BOLD}========================================================
 echo -e "  • Project:             ${CYAN}${PROJECT_NAME}${RESET}"
 echo -e "  • Target Directory:    ${CYAN}${TARGET_DIR}${RESET}"
 echo -e "  • Total Active Skills: ${YELLOW}${TOTAL_SKILLS}${RESET} Sub-Agents & Workflows"
-echo -e "  • SOP Architecture:    ${PURPLE}8-Gate Clean Lifecycle & Ponytail Mindset${RESET}"
-echo -e "  • Configuration:       ${CYAN}${TARGET_DIR}/AGENTS.md${RESET}\n"
+echo -e "  • SOP Architecture:    ${PURPLE}9-Gate Clean Lifecycle & Ponytail Mindset${RESET}"
+echo -e "  • Configuration:       ${CYAN}${TARGET_DIR}/AGENTS.md${RESET}"
+echo -e "  • CLI Relay Pipeline:  ${CYAN}make pipeline FEATURE=<name>${RESET} or ${CYAN}./scripts/gate_pipeline.sh${RESET}\n"
 echo -e "${BOLD}Next Steps in Antigravity IDE:${RESET}"
 echo -e "  1. Open ${CYAN}${TARGET_DIR}${RESET} in Antigravity IDE."
 echo -e "  2. The IDE will automatically discover all Sub-Agents in ${CYAN}.agents/skills/${RESET}."
