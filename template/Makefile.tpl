@@ -64,3 +64,9 @@ agent-pm:
 # =======================================================
 check-files:
 	@bash scripts/check_file_length.sh
+
+# =======================================================
+# Real-Time Visual Neobrutalism Agent Mission Control
+# =======================================================
+dashboard:
+	@bash scripts/dashboard.sh

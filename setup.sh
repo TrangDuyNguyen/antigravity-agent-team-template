@@ -323,7 +323,11 @@ echo -e "  • Total Active Skills: ${YELLOW}${TOTAL_SKILLS}${RESET} Sub-Agents 
 echo -e "  • SOP Architecture:    ${PURPLE}9-Gate Clean Lifecycle & Ponytail Mindset${RESET}"
 echo -e "  • Configuration:       ${CYAN}${TARGET_DIR}/AGENTS.md${RESET}"
 echo -e "  • CLI Relay Pipeline:  ${CYAN}make pipeline FEATURE=<name>${RESET} or ${CYAN}./scripts/gate_pipeline.sh${RESET}\n"
+echo -e "  • Visual Mission Control: ${GREEN}make dashboard${RESET} (Real-time Neobrutalism Command Center)
+"
 echo -e "${BOLD}Next Steps in Antigravity IDE:${RESET}"
 echo -e "  1. Open ${CYAN}${TARGET_DIR}${RESET} in Antigravity IDE."
 echo -e "  2. The IDE will automatically discover all Sub-Agents in ${CYAN}.agents/skills/${RESET}."
 echo -e "  3. Start any new feature with ${YELLOW}/brainstorming${RESET} or ${YELLOW}/feature-lifecycle${RESET}!\n"
+echo -e "  4. Monitor agent activities live anytime via: ${GREEN}make dashboard${RESET}
+"

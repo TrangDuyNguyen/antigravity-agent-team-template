@@ -15,6 +15,7 @@
 - **🎭 9 Distinct Sub-Agent Personas**: PO, Tech Lead, BA, UI/UX Designer, PM, QA/QC Tester, Dev Team, Code Reviewer, and **Security Auditor** operating under the **Four-Eyes Principle (Checks & Balances)**.
 - **🛡️ Zero Tolerance for Compromises (No "Du di")**: Hard quality gates requiring automated test verification, 0 memory leak, zero Critical/High security flaws, and zero-bloat code reviews.
 - **🔒 Zero-Trust AppSec & Cloudflare 6-Phase Audit**: Sub-Agent Security Auditor with VETO power, OWASP MASVS / Top 10 auditing, secret leak detection, cloud security rules, and prompt injection hardening.
+- **🎛️ Real-Time Visual Neobrutalism Mission Control**: Ultra-fast, zero-dependency visual web dashboard (`make dashboard`) designed in signature [Neobrutalism UI style](https://namethatui.com/styles/neobrutalism). Live radar tracking of all 9 Sub-Agents, 8-Gate pipeline stepper, live Kanban board, and human-in-the-loop Gate approval deck.
 - **⚡ CLI Multi-Agent Relay Pipeline**: Automated hand-off orchestrator (`gate_pipeline.sh` & `launch_agent_session.sh`) connecting quality gates, preserving artifacts on disk, and feeding context sequentially into each Sub-Agent session.
 - **✂️ Ruthless Ponytail Mindset**: YAGNI first, standard library and native features before third-party packages, shortest working diff, deletion over addition.
 - **🧩 6 Modular Stacks**:
@@ -66,6 +67,24 @@
 | **Tier 1** | High-Complexity Engineering (`>= 5-8 SP`) | **Claude Sonnet 4.6 (Thinking)** / **Gemini 3.1 Pro** | **Dev Team**: Domain Dev, Native Bridges, Concurrency, Memory Profiling.<br>**QC/QA**: Automated boundary & stress testing. |
 | **Tier 2** | Structured Spec & Design (`3 SP`) | **Gemini 3.1 Pro** / **Claude Sonnet 4.6 (Thinking)** | **UI/UX**: Mermaid flows, 4pt/8pt blueprints, 5 UI states.<br>**Reviewer**: Ponytail AST & diff review.<br>**Dev Core**: 3 SP clean screens/components. |
 | **Tier 3** | Rapid Execution & Logistics (`1-2 SP`) | **Gemini 3.8 Flash** / **Gemini 3.7 Flash** | **PM**: Sprint backlog, WBS task breakdown, Risk log.<br>**Dev**: Small widgets, styling, const fixes. |
+
+---
+
+## 🎛️ Real-Time Visual Mission Control (Neobrutalism UI)
+
+Launch the interactive visual command center anytime with a single command:
+
+```bash
+make dashboard
+# or: bash scripts/dashboard.sh
+```
+
+- **Live Sub-Agent Radar**: Real-time status indicators (🟢 IDLE, 🟡 WORKING, 🔴 BLOCKED) for all 9 Sub-Agents with active task indicators.
+- **8 Quality Gates Stepper**: Visual pipeline showing which gate is open, artifacts produced, and assigned agent.
+- **Sprint Kanban Matrix**: Synchronized live from `docs/00-project-management/sprint-backlog.md` (TODO, IN PROGRESS, DONE).
+- **Human Command Deck**: Click **`[ ⚡ APPROVE CURRENT GATE ]`** to sign off and advance the pipeline directly from your browser.
+- **Zero-Dependency & Lightweight**: Built with Python 3 standard library and Vanilla ES6 + Neobrutalism CSS (no `npm install`, no `pip install`, starts in < 0.5s).
+- **Zero-Trust Security**: Strictly binds to `127.0.0.1` (localhost only) with automatic regex secret/API token masking.
 
 ---
 
