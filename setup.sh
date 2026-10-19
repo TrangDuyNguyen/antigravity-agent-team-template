@@ -217,6 +217,28 @@ if [ "$DRY_RUN" = false ]; then
   cp -R "${TEMPLATE_DIR}/.agents/skills/_core/"* "${TARGET_SKILLS}/"
 fi
 echo -e "    ${GREEN}✔${RESET} Core skills installed: PO, Tech Lead, BA, UI/UX, PM, QA/QC, Reviewer, Security Auditor, Ponytail suite."
+  # Initialize Project Metadata & Sprint Tracking
+  if [[ ! -f "${TARGET_AGENTS}/project.json" ]]; then
+    cat << PROJECT_EOF > "${TARGET_AGENTS}/project.json"
+{
+  "project_name": "${PROJECT_NAME}",
+  "project_type": "${PROJECT_TYPE}",
+  "project_description": "${PROJECT_DESCRIPTION}",
+  "created_at": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+  "active_sprint": 1,
+  "sprints_dir": "docs/00-project-management/sprints"
+}
+PROJECT_EOF
+    echo -e "    ${GREEN}✔${RESET} Initialized ${TARGET_AGENTS}/project.json (Project & Sprint tracking)"
+  fi
+
+  # Initialize docs/00-project-management and Sprint Archive
+  if [[ ! -d "${TARGET_DIR}/docs/00-project-management" ]]; then
+    mkdir -p "${TARGET_DIR}/docs/00-project-management/sprints"
+    cp -R "${TEMPLATE_DIR}/docs/00-project-management/"* "${TARGET_DIR}/docs/00-project-management/"
+    echo -e "    ${GREEN}✔${RESET} Scaffolded docs/00-project-management/ with Sprint 1 starter & archive"
+  fi
+
 
 # Step 3: Copy Selected Stacks
 echo -e "${BLUE}==> [3/5] Installing specialized Dev Sub-Agents for: ${SELECTED_STACKS}...${RESET}"
