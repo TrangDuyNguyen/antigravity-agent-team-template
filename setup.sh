@@ -239,6 +239,13 @@ PROJECT_EOF
     echo -e "    ${GREEN}✔${RESET} Scaffolded docs/00-project-management/ with Sprint 1 starter & archive"
   fi
 
+  # Initialize tests starter folders (Gate 3 manual testcases & BDD Gherkin)
+  if [[ -d "${TEMPLATE_DIR}/tests" ]] && [[ ! -d "${TARGET_DIR}/tests/02-manual-testcases" ]]; then
+    mkdir -p "${TARGET_DIR}/tests"
+    cp -R "${TEMPLATE_DIR}/tests/"* "${TARGET_DIR}/tests/"
+    echo -e "    ${GREEN}✔${RESET} Scaffolded tests/ with Gate 3 manual testcases & BDD scenarios"
+  fi
+
 
 # Step 3: Copy Selected Stacks
 echo -e "${BLUE}==> [3/5] Installing specialized Dev Sub-Agents for: ${SELECTED_STACKS}...${RESET}"
