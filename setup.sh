@@ -216,7 +216,7 @@ if [ "$DRY_RUN" = false ]; then
   # Copy Core Skills
   cp -R "${TEMPLATE_DIR}/.agents/skills/_core/"* "${TARGET_SKILLS}/"
 fi
-echo -e "    ${GREEN}✔${RESET} Core skills installed: PO, Tech Lead, BA, UI/UX, PM, QA/QC, Reviewer, Security Auditor, Ponytail suite."
+echo -e "    ${GREEN}✔${RESET} Core skills installed: PO, Tech Lead, BA, UI/UX, PM, QA/QC, Visual QA, Reviewer, Security Auditor, Ponytail suite."
   # Initialize Project Metadata & Sprint Tracking
   if [[ ! -f "${TARGET_AGENTS}/project.json" ]]; then
     cat << PROJECT_EOF > "${TARGET_AGENTS}/project.json"

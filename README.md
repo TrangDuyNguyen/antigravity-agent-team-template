@@ -13,7 +13,8 @@
 ## 🌟 Highlights
 
 - **🎭 9 Distinct Sub-Agent Personas**: PO, Tech Lead, BA, UI/UX Designer, PM, QA/QC Tester, Dev Team, Code Reviewer, and **Security Auditor** operating under the **Four-Eyes Principle (Checks & Balances)**.
-- **🛡️ Zero Tolerance for Compromises (No "Du di")**: Hard quality gates requiring automated test verification, 0 memory leak, zero Critical/High security flaws, and zero-bloat code reviews.
+- **🛡️ Zero Tolerance for Compromises (No "Du di")**: Hard quality gates requiring automated test verification, 0 memory leak, zero Critical/High security flaws, 0 visual overflow (`RenderFlex overflow`), and zero-bloat code reviews.
+- **👁️ Multimodal Visual QA & Pixel-Perfect Audit**: Native Vision AI integration via `visual-qa` skill, Flutter Preview MCP, Golden Tests, and Browser Sub-Agent to inspect ground-truth UI renders, detect layout overflows, audit 5 UI states, accessibility text scaling (1.5x), and Design System token mismatches.
 - **🔒 Zero-Trust AppSec & Cloudflare 6-Phase Audit**: Sub-Agent Security Auditor with VETO power, OWASP MASVS / Top 10 auditing, secret leak detection, cloud security rules, and prompt injection hardening.
 - **🎛️ Real-Time Visual Neobrutalism Mission Control**: Ultra-fast, zero-dependency visual web dashboard (`make dashboard`) designed in signature [Neobrutalism UI style](https://namethatui.com/styles/neobrutalism). Live radar tracking of all 9 Sub-Agents, 8-Gate pipeline stepper, live Kanban board, and human-in-the-loop Gate approval deck.
 - **⚡ CLI Multi-Agent Relay Pipeline**: Automated hand-off orchestrator (`gate_pipeline.sh` & `launch_agent_session.sh`) connecting quality gates, preserving artifacts on disk, and feeding context sequentially into each Sub-Agent session.
